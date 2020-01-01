@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AudioManager
+{
+    public class AudioListItemNeed
+    {
+        public string AudioPath;
+        public PlayAudioManager AudioPlayer;
+        public GetAudio _GetAudio;
+        public Action ItemClick;
+    }
+}
