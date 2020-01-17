@@ -6,11 +6,17 @@ using UnityEngine.Networking;
 
 namespace AudioManager
 {
-    public class GetAudio:MonoBehaviour
+    public class GetAudio : Manager.MonoSingleton<GetAudio>
     {
-        
+        [Obsolete]
         public void getAudio(string path, Action<AudioClip> getAudioClip)
         {
+            StartCoroutine(LoadAudio(path, getAudioClip));
+        }
+        public void Get(int index, Action<AudioClip> getAudioClip)
+        {
+            PlayAudioManager.GetInstance.SetNowAudioIndex(index);
+            string path = ConstManager.AudioNameList[index];
             StartCoroutine(LoadAudio(path, getAudioClip));
         }
 

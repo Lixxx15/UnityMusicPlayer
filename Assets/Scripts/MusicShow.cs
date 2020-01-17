@@ -12,25 +12,35 @@ namespace MusicPlayerShowModule
         public LineRenderer lineRenderer;
         public float po;
         private Vector3 middleCubePostion;
-
+        public float _timeout;
+        public float t;
         void Start()
         {
             audioSource = GetComponent<AudioSource>();
             lineRenderer.positionCount = samples.Length;
-            
+            t = _timeout;
         }
 
         void Update()
         {
-            audioSource.GetSpectrumData(samples, 0, FFTWindow.BlackmanHarris);
-            int j = samples.Length / 2;
-            int n = 0;
-            for (int i = samples.Length / 2; i < samples.Length; i++)
+            if (_timeout > 0f)
             {
-                j--;
-                lineRenderer.SetPosition(i, new Vector3(0.1f * (i - samples.Length / 2 + po)-2, (samples[n] )* 10, 0));
-                lineRenderer.SetPosition(j, new Vector3(0.1f * (j - samples.Length / 2)-2, (samples[n] ) * 10, 0));
-                n++;
+                _timeout -= Time.deltaTime;
+                if (_timeout <= 0f)
+                {
+                    _timeout = t;
+
+                    audioSource.GetSpectrumData(samples, 0, FFTWindow.BlackmanHarris);
+                    int j = samples.Length / 2;
+                    int n = 0;
+                    for (int i = samples.Length / 2; i < samples.Length; i++)
+                    {
+                        j--;
+                        lineRenderer.SetPosition(i, new Vector3(0.1f * (i - samples.Length / 2 + po) - 2, (samples[n]) * 10, 0));
+                        lineRenderer.SetPosition(j, new Vector3(0.1f * (j - samples.Length / 2) - 2, (samples[n]) * 10, 0));
+                        n++;
+                    }
+                }
             }
         }
     }

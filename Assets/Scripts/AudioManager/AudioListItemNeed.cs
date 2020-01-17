@@ -9,8 +9,6 @@ namespace AudioManager
     public class AudioListItemNeed
     {
         public string AudioPath;
-        public PlayAudioManager AudioPlayer;
-        public GetAudio _GetAudio;
         public Action ItemClick;
     }
 }

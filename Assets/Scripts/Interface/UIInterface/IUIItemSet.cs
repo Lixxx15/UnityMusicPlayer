@@ -8,6 +8,6 @@ namespace Interface.UIInterface
 {
     public interface IUIItemSet<T>
     {
-        void SetUI(T t);
+        void SetUI(int index, T t);
     }
 }

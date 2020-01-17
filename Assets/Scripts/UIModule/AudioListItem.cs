@@ -14,9 +14,11 @@ namespace UIModule
         private Button Btn_Click;
         private FileInfo AudioFile;
         private AudioListItemNeed _Need;
+        private int num;
 
-        public void SetUI(AudioListItemNeed t)
+        public void SetUI(int index, AudioListItemNeed t)
         {
+            num = index;
             if (!File.Exists(t.AudioPath))
             {
                 Debug.LogError(t.AudioPath + "#不存在文件");
@@ -31,7 +33,7 @@ namespace UIModule
 
         public void PlayAudio()
         {
-            _Need._GetAudio.getAudio(_Need.AudioPath, _Need.AudioPlayer.PlayAudio);
+            GetAudio.GetInstance.Get(num, PlayAudioManager.GetInstance.PlayAudio);
             _Need.ItemClick();
         }
     }

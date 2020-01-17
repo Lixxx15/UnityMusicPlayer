@@ -15,7 +15,7 @@ namespace JsonCore
             AudioPath = Application.temporaryCachePath + "/../Audio",
 #elif UNITY_IOS && !UNITY_EDITOR
 #else
-            AudioPath = @"L:\MusicPlayer\Audio",
+            AudioPath = @"D:\AudioOGG",
 #endif
         };
         void Awake()

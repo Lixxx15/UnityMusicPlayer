@@ -11,8 +11,6 @@ namespace UIModule
     {
         public Transform ListParent;
         public AudioListItem ListItem;
-        public PlayAudioManager AudioPlayer;
-        public GetAudio _GetAudio;
         public Button Btn_Pause;
         public Text Pause_Text;
         private bool IsPause = true;
@@ -38,11 +36,9 @@ namespace UIModule
                 item.transform.SetParent(ListParent);
                 item.transform.localScale = Vector3.one;
                 AudioListItem AItem = item.GetComponent<AudioListItem>();
-                AItem.SetUI(new AudioListItemNeed
+                AItem.SetUI(i, new AudioListItemNeed
                 {
                     AudioPath = ConstManager.AudioNameList[i],
-                    AudioPlayer = this.AudioPlayer,
-                    _GetAudio = this._GetAudio,
                     ItemClick = () => {
                         IsPause = false;
                         Pause_Text.text = "||";
@@ -57,10 +53,10 @@ namespace UIModule
             {
                 IsPause = false;
                 Pause_Text.text = "||";
-                AudioPlayer.ContinueAudio(()=> {
-                    _GetAudio.getAudio(ConstManager.AudioNameList[0], (audio) =>
+                PlayAudioManager.GetInstance.ContinueAudio(()=> {
+                    GetAudio.GetInstance.Get(0, (audio) =>
                     {
-                        AudioPlayer.PlayAudio(audio);
+                        PlayAudioManager.GetInstance.PlayAudio(audio);
                     });
                 });
             }
@@ -68,7 +64,7 @@ namespace UIModule
             {
                 IsPause = true;
                 Pause_Text.text = ">";
-                AudioPlayer.PauseAudio();
+                PlayAudioManager.GetInstance.PauseAudio();
             }
         }
     }
